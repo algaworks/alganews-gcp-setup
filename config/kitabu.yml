@@ -1,0 +1,46 @@
+# The book's title. Will be used everywhere!
+title: "Especialista React - Deploy do back-end em produção na Google Cloud Platform"
+
+# The book's language.
+language: pt
+
+# Your book copyright info.
+# Here's some examples:
+#
+#   Copyright 2016 by AlgaWorks.
+#   Copyright 2016 by AlgaWorks. This work is licensed under MIT License.
+#   This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+#   This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+#   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+#
+copyright: "Copyright (C) 2021 AlgaWorks"
+
+# Who's publishing this book.
+publisher: "AlgaWorks"
+
+# When this book was published.
+published_at: "26/06/2021"
+
+edition_number: "1.0"
+
+# Some book description.
+subject: ""
+
+# Some keywords that identify this book.
+keywords: "spring, rest, rest api, restful, restful api"
+
+# Some unique identification. Works great with your domain
+# like `http://yourbook.example.com`.
+uid: "http://alga.works/erjs-backend/"
+
+# Your book identification like ISBN or ISSN.
+identifier:
+  id: "http://alga.works/erjs-backend/"
+  type: "URL" # can be ISBN, ISSN or URL
+
+# This book authors.
+authors:
+  - "Thiago Faria"
+  - "Alex Silva"
+
+theme: github

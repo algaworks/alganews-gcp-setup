@@ -1,0 +1,61 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/launch-stage: BETA
+  labels:
+    cloud.googleapis.com/location: us-central1
+  name: alganews-auth
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '1'
+        autoscaling.knative.dev/minScale: '1'
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 327.0.0
+        run.googleapis.com/sandbox: gvisor
+        run.googleapis.com/vpc-access-connector: vpc-connector-us-central1
+        run.googleapis.com/vpc-access-egress: private-ranges-only
+    spec:
+      containerConcurrency: 80
+      containers:
+      - env:
+        - name: CLOUD_SQL_CONNECTION_NAME
+          value: ip-do-mysql-aqui
+        - name: DB_USER
+          value: root
+        - name: DB_PASS
+          value: alganews
+        - name: DB_NAME
+          value: alganews
+        - name: SPRING_MAIL_PASSWORD
+          value: token-da-api-do-sendgrid
+        - name: ALGANEWS_AUTH_URL
+          value: https://auth.alganews.com.br
+        - name: ALGANEWS_AUTH_CLIENTS_ADMIN_CALLBACK_URLS
+          value: https://admin.alganews.com.br/authorize
+        - name: ALGANEWS_AUTH_CLIENTS_CMS_CALLBACK_URLS
+          value: https://cms.alganews.com.br/authorize
+        - name: ALGANEWS_SECURITY_LOGOUT_DEFAULT_REDIRECT_URL
+          value: https://alganews.com.br
+        - name: ALGANEWS_EMAIL_FROM
+          value: AlgaNews <donotreply@alganews.com.br>
+        - name: ALGANEWS_AUTH_TOKENS_SIGNING_KEY
+          value: 7EoTQsw6$KycR&B9q4YAMPCss!!F6fE4FqNv!B2vEz 
+        - name: SPRING_PROFILES_ACTIVE
+          value: production
+        image: gcr.io/PROJECT_ID/alganews-auth
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
